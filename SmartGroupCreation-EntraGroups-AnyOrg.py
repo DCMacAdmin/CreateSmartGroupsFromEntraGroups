@@ -12,7 +12,7 @@ CLIENT_SECRET = ""  # your API client secret
 DRY_RUN = False   # True = don't create, just print actions
 TEST_GROUPS = ["Site 1", "Site 2"]  # Only process these groups
 
-print("✅ Script started")
+print("Script started")
 
 # ------------------------
 # AUTHENTICATE (OAuth Client Credentials Flow)
@@ -33,7 +33,7 @@ print(f"Raw response: {resp.text}")
 
 resp.raise_for_status()
 token = resp.json()["access_token"]
-print("✅ Got token")
+print("Got token")
 
 print(f"Starting get headers")
 
@@ -129,8 +129,9 @@ for group, count in group_map.items():
         }
         r = requests.post(f"{JAMF_URL}/api/v2/computer-groups/smart-groups", headers=headers, json=payload)
         if r.status_code in (200, 201):
-            print(f"✅ Created Smart Group: {sg_name}")
+            print(f"Created Smart Group: {sg_name}")
         else:
-            print(f"❌ Failed to create {sg_name}: {r.status_code} {r.text}")
+            print(f"Failed to create {sg_name}: {r.status_code} {r.text}")
+
 
 print(f"End of script")
